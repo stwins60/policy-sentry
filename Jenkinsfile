@@ -65,7 +65,7 @@ def determineTargetEnvironment() {
         return 'qa'
     } else if (branchName == 'prod') {
         return 'prod'
-    } else if (branchName === 'dev') {
+    } else {
         return 'dev'
     }
 }
