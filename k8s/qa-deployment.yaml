@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: qa-deployment
-        image: idrisniyi94/policy-sentry:latest
+        image: idrisniyi94/policy-sentry:qa
         resources:
           limits:
             memory: "128Mi"

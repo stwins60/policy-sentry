@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: dev-deployment
-        image: idrisniyi94/policy-sentry:latest
+        image: idrisniyi94/policy-sentry:dev
         resources:
           limits:
             memory: "128Mi"
