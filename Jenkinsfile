@@ -31,9 +31,9 @@ pipeline {
     }
 }
 
-def gitCheckout(branch, repositoryUrl) {
-    git branch: branch, url: repositoryUrl
-}
+// def gitCheckout(branch, repositoryUrl) {
+//     git branch: branch, url: repositoryUrl
+// }
 
 def determineTargetEnvironment() {
     def branchName = env.BRANCH_NAME
