@@ -26,8 +26,10 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                def imageTag = determineTargetEnvironment()
-                sh "docker build -t idrisniyi94/policy-sentry:${imageTag} ."
+                script {
+                    def imageTag = determineTargetEnvironment()
+                    sh "docker build -t idrisniyi94/policy-sentry:${imageTag} ."
+                }
             }
         }
 
