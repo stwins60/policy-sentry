@@ -26,7 +26,8 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh "docker build -t idrisniyi94/policy-sentry:latest ."
+                def targetEnvironment = determineTargetEnvironment()
+                sh "docker build -t idrisniyi94/policy-sentry:${targetEnvironment} ."
             }
         }
 
@@ -62,7 +63,7 @@ def determineTargetEnvironment() {
         return 'qa'
     } else if (branchName == 'prod') {
         return 'prod'
-    } else {
+    } else if (branchName === 'dev') {
         return 'dev'
     }
 }
