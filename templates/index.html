@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAM Creator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='assets/images/favicon.ico') }}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+            <form action="{{ url_for('index') }}" id="executePolicy" method="post" enctype="multipart/form-data">
+                <!-- <h1>IAM Creator</h1> -->
+                <img src="{{ url_for('static', filename='assets/images/iam-creator-logo.png') }}" alt="IAM Creator Logo" width="200" height="200">
+                <p>IAM Creator is an innovative web-based tool designed to streamline the process of generating IAM policies and managing resource permissions. As part of the AWS (Amazon Web Services) ecosystem, IAM Creator empowers developers and administrators to effortlessly create fine-grained access control policies to secure their AWS resources. With its intuitive interface and powerful features, IAM Creator is the ultimate solution for simplifying IAM policy management.</p>
+                <label for="iam_service">Select Choices</label>
+                <select name="iam_service" id="iam_service" style="margin-top: 10px;">
+                    {% for option in choices%}
+                        <!-- <p>{{selected_option}}</p> -->
+                        <option {% if option==selected_option %}selected{% endif %}>{{ option }}</option>
+                        console.log(option);
+                    {% endfor %}
+                </select>
+                <div id="resource-input">
+                    <input type="text" name="service" id="service" placeholder="AWS Resource" style="margin-bottom: 20px; margin-top: 20px;"/>
+                    <input type="text" name="role_access" id="role_access" placeholder="Access ([read|write|list|tagging|permissions-management])" style="margin-bottom: 20px;" />
+                    <!-- <input type="text" name="resource_type" id="resource_type" placeholder="Resource type" style="margin-bottom: 20px;" /> -->
+                </div>
+                
+                <div class="field-input" id="upload-policy" style="margin-bottom: 20px; margin-top: 20px;">
+                    <p>Example of policy file</p>
+                    <img src="{{ url_for('static', filename='assets/images/policy-example.png') }}" alt="Policy File Example"><br>
+                    <input type="file" id="file" name="file" class="inputfile" style="margin-top: 50px;"/>
+                </div>
+                <button>Create</button>
+                <!-- <a href="{{ url_for('reset') }}" class="btn btn-danger">Reset</a> -->
+            </form>
+        </div>
+        <div class="overlay-panel overlay-right">
+            <h1>IAM Results</h1>
+            <pre>{{output}}</pre>
+        </div>
+    </div>
+</body>
+<script>
+    $('#iam_service').change(function() {
+        var selected = $(this).val();
+        console.log(selected);
+        if (selected == 'Create Policy') {
+            $('#upload-policy').show();
+            $('#resource-input').hide();
+            console.log('show');
+        } else if (selected == 'Get Roles') {
+            $('#resource-input').show();
+            $('#upload-policy').hide();
+            console.log('hide');
+        }
+    });
+    $('#iam_service').trigger('change');
+
+    // $(document).ready(function() {
+    //     $('#executePolicy').submit(function(e) {
+    //         e.preventDefault();
+    //         var formData = new FormData(this);
+    //         $.ajax({
+    //             url: "{{ url_for('index') }}",
+    //             type: 'POST',
+    //             data: formData,
+    //             success: function(data) {
+    //                 console.log(data);
+    //                 $('.overlay-panel').show();
+    //                 $('.overlay-panel').html(data);
+    //             },
+    //             cache: false,
+    //             contentType: false,
+    //             processData: false
+    //         });
+    //     });
+    // }
+</script>
+</html>
