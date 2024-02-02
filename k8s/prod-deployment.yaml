@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prod-deployment
+  namespace: prod-namespace
+  labels:
+    app: prod-deployment
 spec:
   selector:
     matchLabels:

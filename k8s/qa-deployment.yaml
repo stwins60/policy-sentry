@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: qa-deployment
+  namespace: qa-namespace
 spec:
   selector:
     matchLabels:
@@ -10,6 +11,7 @@ spec:
     metadata:
       labels:
         app: qa-deployment
+        
     spec:
       containers:
       - name: qa-deployment
