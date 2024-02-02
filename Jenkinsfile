@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    environment {
+    // environment {
 
-    }
+    // }
 
     stages {
         stage('Clean Workspace') {
@@ -12,7 +12,9 @@ pipeline {
             }
         }
         stage('Git Checkout') {
-            chekout scm
+            steps {
+                checkout scmGit(branches: [[name: '*/dev'], [name: '*/qa'], [name: '*/prod']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/stwins60/policy-sentry.git']])
+            }
         }
 
         stage('Deploy') {
