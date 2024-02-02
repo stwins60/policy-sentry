@@ -13,7 +13,19 @@ pipeline {
         }
         stage('Git Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/stwins60/policy-sentry.git'
+                script {
+                    parallel {
+                        "QA": {
+                            gitCheckout('qa', 'https://github.com/stwins60/policy-sentry.git')
+                        },
+                        "Prod": {
+                            gitCheckout('prod', 'https://github.com/stwins60/policy-sentry.git')
+                        },
+                        "Dev": {
+                            gitCheckout('dev', 'https://github.com/stwins60/policy-sentry.git')
+                        }
+                    }
+                }
             }
         }
 
@@ -31,6 +43,10 @@ pipeline {
             }
         }
     }
+}
+
+def gitCheckout(branch, repositoryUrl) {
+    git branch: branch, url: repositoryUrl
 }
 
 def determineTargetEnvironment() {
