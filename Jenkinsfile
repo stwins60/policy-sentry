@@ -14,7 +14,7 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 script {
-                    parallel {
+                    parallel branches: {
                         "QA": {
                             gitCheckout('qa', 'https://github.com/stwins60/policy-sentry.git')
                         },
