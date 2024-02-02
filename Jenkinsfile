@@ -35,7 +35,10 @@ pipeline {
 
         stage('Docker Push') {
             steps {
-                sh "docker push idrisniyi94/policy-sentry:latest"
+                script {
+                    def imageTag = determineTargetEnvironment()
+                    sh "docker push idrisniyi94/policy-sentry:${imageTag}"
+                }
             }
         }
 
