@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('d4506f04-b98c-47db-95ce-018ceac27ba6')
+        BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
     }
 
     stages {
@@ -57,10 +58,6 @@ pipeline {
         }
     }
 }
-
-// def gitCheckout(branch, repositoryUrl) {
-//     git branch: branch, url: repositoryUrl
-// }
 
 def determineTargetEnvironment() {
     def branchName = env.BRANCH_NAME
