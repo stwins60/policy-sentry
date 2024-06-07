@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prod-deployment
+  namespace: prod-namespace
+  labels:
+    app: prod-deployment
 spec:
   selector:
     matchLabels:
@@ -13,7 +16,7 @@ spec:
     spec:
       containers:
       - name: prod-deployment
-        image: idrisniyi94/policy-sentry:latest
+        image: idrisniyi94/policy-sentry:prod
         resources:
           limits:
             memory: "128Mi"
@@ -21,8 +24,3 @@ spec:
         ports:
         - containerPort: 5000
 
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: prod-namespace

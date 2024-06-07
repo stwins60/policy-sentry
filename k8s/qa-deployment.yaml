@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: qa-deployment
+  namespace: qa-namespace
 spec:
   selector:
     matchLabels:
@@ -10,19 +11,14 @@ spec:
     metadata:
       labels:
         app: qa-deployment
+        
     spec:
       containers:
       - name: qa-deployment
-        image: idrisniyi94/policy-sentry:latest
+        image: idrisniyi94/policy-sentry:qa
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
         - containerPort: 5000
-
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: qa-namespace
