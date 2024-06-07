@@ -35,11 +35,6 @@ for f in os.listdir(app.config['UPLOAD_FOLDER']):
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], f))
     else:
         pass
-# @app.route('/', methods=['GET', 'POST'])
-# def index():
-#     choices = ["Create Policy", "Get Roles"]
-#     return render_template('index.html', choices=choices)
-# @app.route('/executePolicy', methods=['GET', 'POST'])
 
 def allowed_file(filename):
     return '.' in filename and \
